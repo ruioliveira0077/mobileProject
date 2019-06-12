@@ -1,0 +1,58 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login">
+
+        <!-- Email Label -->
+
+    <EditText
+        android:id="@+id/input_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="27dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/input_password"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.236"
+        tools:layout_editor_absoluteX="16dp" />
+
+        <!-- Password Label -->
+
+    <EditText
+        android:id="@+id/input_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="76dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/link_signup"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/link_signup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="352dp"
+        android:gravity="center"
+        android:text="No account yet? Create one"
+        android:textSize="16dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="34dp"
+        android:text="Sign In"
+        app:layout_constraintBottom_toBottomOf="@+id/link_signup"
+        app:layout_constraintTop_toBottomOf="@+id/input_password"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="161dp" />
+
+</android.support.constraint.ConstraintLayout>
