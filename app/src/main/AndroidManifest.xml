@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CoursesActivity"></activity>
+        <activity android:name=".MyCalendarActivity"></activity>
+        <activity android:name=".DisciplinesActivity" />
+        <activity android:name=".CoursesActivity" />
         <activity android:name=".Menu" />
         <activity android:name=".Login">
             <intent-filter>
@@ -21,6 +23,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+        <activity
+            android:name=".GenericForm"
+            android:theme="@style/AppTheme.genericFormTheme" />
     </application>
 
 </manifest>

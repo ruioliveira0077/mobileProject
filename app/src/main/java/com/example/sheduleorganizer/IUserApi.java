@@ -21,4 +21,9 @@ public interface IUserApi {
 
     @GET("getCourses/courses")
     Call<List<Courses>> getCoursesByIdUser(@Query("user_id")Long user_id);
+
+    @FormUrlEncoded
+    @POST("getCourses/createCourse")
+    Call<ResponseBody> createUser(@Field("user_id") long user_id,
+                                  @Field("title") String title);
 }

@@ -1,6 +1,8 @@
 package com.masters.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,12 +13,20 @@ public class Courses {
 
     String title;
     @Id
-
-
-    Long id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY) long id;
     Long user_id;
     
+    public Courses() {
+    	
+    }
     
+	public Courses(Long user_id, String title) {
+		super();
+		this.id = id; 
+		this.user_id = user_id;
+		this.title = title; 
+	}
+	
 	public String getTitle() {
 		return title;
 	}

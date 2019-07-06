@@ -31,11 +31,21 @@
         app:layout_constraintStart_toEndOf="@+id/signOut"
         tools:layout_editor_absoluteY="16dp" />
 
+
+    <Spinner
+        android:id="@+id/selectCourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:layout_marginBottom="29dp"
+        app:layout_constraintBottom_toTopOf="@+id/coursesList"
+        app:layout_constraintTop_toBottomOf="@+id/signOut" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/coursesList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="104dp"
         app:layout_constraintTop_toBottomOf="@+id/signOut"
         tools:layout_editor_absoluteX="0dp">
 

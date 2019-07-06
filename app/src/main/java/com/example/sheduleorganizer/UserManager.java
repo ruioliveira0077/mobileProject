@@ -30,7 +30,7 @@ public class UserManager {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.69:8080/sheduleOrganizer/")
+                .baseUrl("http://172.16.8.59:8080/sheduleOrganizer/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
@@ -55,4 +55,10 @@ public class UserManager {
         Call<List<Courses>> userCall = service.getCoursesByIdUser(user_id);
         userCall.enqueue(callback);
     }
+
+    public void createCourse(long user_id, String title, Callback<ResponseBody> callback) {
+        Call<ResponseBody> userCall = service.createUser(user_id,title);
+        userCall.enqueue(callback);
+    }
+
 }

@@ -14,6 +14,9 @@ public class Menu extends AppCompatActivity {
     private SharedPreferences loginPreferences;
     private Button signOut;
     private Button getCourses;
+    private Button getDisciplines;
+    private Button myCalendar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +24,9 @@ public class Menu extends AppCompatActivity {
 
         signOut = findViewById(R.id.signOut);
         getCourses = findViewById(R.id.myCourses);
+        getDisciplines = findViewById(R.id.myDisciplines);
+        myCalendar = findViewById(R.id.Calendar);
+
 
         signOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -44,5 +50,22 @@ public class Menu extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        getDisciplines.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(Menu.this, DisciplinesActivity.class);
+                i.putExtra(EXTRA_MESSAGE, "1");
+                startActivity(i);
+            }
+        });
+
+        myCalendar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(Menu.this, MyCalendarActivity.class);
+                i.putExtra(EXTRA_MESSAGE, "1");
+                startActivity(i);
+            }
+        });
+
     }
 }
