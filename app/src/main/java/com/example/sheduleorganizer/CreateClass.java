@@ -348,7 +348,7 @@ public class CreateClass extends AppCompatActivity {
         addClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                /*
                 userManager.createClass(Long.parseLong(userId),newCourse.getText().toString(), new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -356,10 +356,10 @@ public class CreateClass extends AppCompatActivity {
                         if (response.code() == 200) {
                             Log.d("status", "200");
 
-                            /*
+                           
                             Intent i = new Intent(GenericForm.this, CoursesActivity.class);
                             startActivity(i);
-                            */
+
 
                         } else {
                             Log.d("status", "Failed");
@@ -372,6 +372,7 @@ public class CreateClass extends AppCompatActivity {
                                 , Toast.LENGTH_LONG).show();
                     }
                 });
+                */
             }
         });
 

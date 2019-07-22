@@ -14,10 +14,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.masters.models.Rooms;
+import com.masters.models.Subjects;
 
 public interface RoomsRepository extends CrudRepository<Rooms, Long>{
 
 
 	 @Query(value = "SELECT * FROM Rooms",  nativeQuery = true)
 	 Iterable<Rooms> allRooms();
+	 
+	 @Query(value = "SELECT * FROM Rooms  WHERE id=:room_id",  nativeQuery = true)
+	 Iterable<Rooms> roomById(@Param("room_id") Long room_id);
 }
