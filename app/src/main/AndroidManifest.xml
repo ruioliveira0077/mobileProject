@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyCalendarActivity"></activity>
+        <activity android:name=".CreateClass"></activity>
+        <activity android:name=".DayGrid" />
+        <activity android:name=".MyCalendarActivity" />
         <activity android:name=".DisciplinesActivity" />
         <activity android:name=".CoursesActivity" />
         <activity android:name=".Menu" />
@@ -25,6 +27,12 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".GenericForm"
+            android:theme="@style/AppTheme.genericFormTheme" />
+        <activity
+            android:name=".CreateSubjectForm"
+            android:theme="@style/AppTheme.genericFormTheme" />
+        <activity
+            android:name=".GenericFormAddClass"
             android:theme="@style/AppTheme.genericFormTheme" />
     </application>
 

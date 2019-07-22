@@ -1,6 +1,5 @@
 package com.example.sheduleorganizer;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -12,50 +11,51 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListAdapter  extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
+public class ListAdapterTimeTable  extends RecyclerView.Adapter<ListAdapterTimeTable.ViewHolder>{
 
-    private ArrayList<Courses> textStrings = new ArrayList<>();
+    private ArrayList<Classes> textStrings = new ArrayList<>();
     private Context mContext;
     private static UserManager userManager;
 
-    public ListAdapter(ArrayList<Courses> textStrings, Context mContext) {
+    public ListAdapterTimeTable(ArrayList<Classes> textStrings, Context mContext) {
         this.textStrings = textStrings;
         this.mContext = mContext;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_list_item, viewGroup, false);
-        ViewHolder holder = new ViewHolder(view);
+    public ListAdapterTimeTable.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_timetable, viewGroup, false);
+        ListAdapterTimeTable.ViewHolder holder = new ListAdapterTimeTable.ViewHolder(view);
         return holder;
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-        viewHolder.text.setText(textStrings.get(i).getTitle());
+    public void onBindViewHolder(@NonNull ListAdapterTimeTable.ViewHolder viewHolder, final int i) {
+        viewHolder.hours.setText(textStrings.get(i).getDate());
+
+
         userManager = userManager.getInstance();
 
+        // Delete Class
         viewHolder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Delete at position"+textStrings.get(i).getId(), Toast.LENGTH_SHORT).show();
 
-                userManager.deleteCourse(textStrings.get(i).getId(), new Callback<okhttp3.ResponseBody>() {
+                userManager.deleteClass(textStrings.get(i).getId(), new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<okhttp3.ResponseBody> call, Response<okhttp3.ResponseBody> response) {
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Log.w(" => ",new Gson().toJson(response));
                         if (response.code() == 200) {
                             Log.d("status", "200");
@@ -68,21 +68,9 @@ public class ListAdapter  extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
                     }
                     @Override
                     public void onFailure(Call<okhttp3.ResponseBody> call, Throwable t) {
-                        Log.d("eroos",t.getMessage() );
+                        Log.d("FailureError",t.getMessage() );
                     }
                 });
-            }
-        });
-
-        viewHolder.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "Delete at position"+textStrings.get(i).getId(), Toast.LENGTH_SHORT).show();
-
-               // startActivity(new Intent(CoursesActivity.this, GenericForm.class));
-                Intent intent = new Intent (v.getContext(), GenericForm.class);
-                v.getContext().startActivity(intent);
-
             }
         });
     }
@@ -93,17 +81,20 @@ public class ListAdapter  extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView  text;
+        TextView hours;
+        TextView info;
+        TextView room;
         ImageView delete;
-        ImageView edit;
+
         RelativeLayout parentLayout;
         public ViewHolder(View itemView){
             super(itemView);
-            text = itemView.findViewById(R.id.text);
-            edit = (ImageView) itemView.findViewById(R.id.edit);
+
+            hours = itemView.findViewById(R.id.hour);
+            info = itemView.findViewById(R.id.info);
+            room = itemView.findViewById(R.id.room);
             delete = (ImageView) itemView.findViewById(R.id.delete);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
 }
-

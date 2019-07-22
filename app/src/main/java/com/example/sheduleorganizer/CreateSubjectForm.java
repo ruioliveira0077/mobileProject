@@ -1,8 +1,8 @@
 package com.example.sheduleorganizer;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -18,17 +18,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GenericForm extends Activity {
+public class CreateSubjectForm extends AppCompatActivity {
 
     Button save;
-    EditText newCourse;
+    EditText newSubject;
     public static UserManager userManager;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.generic_form);
+        setContentView(R.layout.create_subject_form);
         userManager = userManager.getInstance();
+
+        Intent i = getIntent();
+        final String course_id = i.getStringExtra("course_id");
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -42,13 +47,14 @@ public class GenericForm extends Activity {
             @Override
             public void onClick(View v) {
 
-                newCourse = findViewById(R.id.addCourse);
+                newSubject = findViewById(R.id.addSubject);
 
                 SharedPreferences shared = getSharedPreferences("info",MODE_PRIVATE);
                 final String userId = shared.getString("id","DEFAULT");
                 Log.d("userId", userId);
 
-                userManager.createCourse(Long.parseLong(userId),newCourse.getText().toString(), new Callback<ResponseBody>() {
+
+                userManager.createSubject(Long.parseLong(course_id),newSubject.getText().toString(), new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Log.w(" => ",new Gson().toJson(response));
@@ -56,7 +62,7 @@ public class GenericForm extends Activity {
                             Log.d("status", "200");
 
 
-                            Intent i = new Intent(GenericForm.this, CoursesActivity.class);
+                            Intent i = new Intent(CreateSubjectForm.this, DisciplinesActivity.class);
                             startActivity(i);
 
                         } else {
@@ -65,7 +71,7 @@ public class GenericForm extends Activity {
                     }
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(GenericForm.this,
+                        Toast.makeText(CreateSubjectForm.this,
                                 "Error is " + t.getMessage()
                                 , Toast.LENGTH_LONG).show();
                     }

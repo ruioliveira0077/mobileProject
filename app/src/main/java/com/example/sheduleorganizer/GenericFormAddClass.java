@@ -18,10 +18,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GenericForm extends Activity {
+public class GenericFormAddClass extends Activity {
 
     Button save;
-    EditText newCourse;
     public static UserManager userManager;
 
     @Override
@@ -37,6 +36,7 @@ public class GenericForm extends Activity {
         int height = dm.heightPixels;
         getWindow().setLayout((int)(with*.6),(int)(height*.3));
 
+        /*
         save = findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,5 +72,6 @@ public class GenericForm extends Activity {
                 });
             }
         });
+        */
     }
 }

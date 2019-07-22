@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="submit" type="id" />
+    <item name="signInButton" type="id" />
+    <item name="invalidLogin" type="id" />
 </resources>

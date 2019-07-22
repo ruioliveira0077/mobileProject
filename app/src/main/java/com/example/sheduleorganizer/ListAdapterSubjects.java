@@ -2,7 +2,6 @@ package com.example.sheduleorganizer;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,19 +16,19 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListAdapter  extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
+public class ListAdapterSubjects  extends RecyclerView.Adapter<ListAdapterSubjects.ViewHolder>{
 
-    private ArrayList<Courses> textStrings = new ArrayList<>();
+    private ArrayList<Subjects> textStrings = new ArrayList<>();
     private Context mContext;
     private static UserManager userManager;
 
-    public ListAdapter(ArrayList<Courses> textStrings, Context mContext) {
+    public ListAdapterSubjects(ArrayList<Subjects> textStrings, Context mContext) {
         this.textStrings = textStrings;
         this.mContext = mContext;
     }
@@ -42,7 +41,6 @@ public class ListAdapter  extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
         return holder;
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         viewHolder.text.setText(textStrings.get(i).getTitle());
@@ -51,11 +49,10 @@ public class ListAdapter  extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
         viewHolder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Delete at position"+textStrings.get(i).getId(), Toast.LENGTH_SHORT).show();
 
-                userManager.deleteCourse(textStrings.get(i).getId(), new Callback<okhttp3.ResponseBody>() {
+                userManager.deleteSubject(textStrings.get(i).getId(), new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<okhttp3.ResponseBody> call, Response<okhttp3.ResponseBody> response) {
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Log.w(" => ",new Gson().toJson(response));
                         if (response.code() == 200) {
                             Log.d("status", "200");
@@ -73,18 +70,6 @@ public class ListAdapter  extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
                 });
             }
         });
-
-        viewHolder.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "Delete at position"+textStrings.get(i).getId(), Toast.LENGTH_SHORT).show();
-
-               // startActivity(new Intent(CoursesActivity.this, GenericForm.class));
-                Intent intent = new Intent (v.getContext(), GenericForm.class);
-                v.getContext().startActivity(intent);
-
-            }
-        });
     }
 
     @Override
@@ -95,15 +80,12 @@ public class ListAdapter  extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView  text;
         ImageView delete;
-        ImageView edit;
         RelativeLayout parentLayout;
         public ViewHolder(View itemView){
             super(itemView);
             text = itemView.findViewById(R.id.text);
-            edit = (ImageView) itemView.findViewById(R.id.edit);
             delete = (ImageView) itemView.findViewById(R.id.delete);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
 }
-

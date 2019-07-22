@@ -1,15 +1,14 @@
 package com.example.sheduleorganizer;
 
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -30,7 +29,7 @@ public class UserManager {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://172.16.8.59:8080/sheduleOrganizer/")
+                .baseUrl("http://192.168.1.69:8080/sheduleOrganizer/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
@@ -61,4 +60,59 @@ public class UserManager {
         userCall.enqueue(callback);
     }
 
+    public void getCourseByTitle(long user_id, String title, Callback<List<Courses>> callback) {
+        Call<List<Courses>> userCall = service.courseByTitle(user_id,title);
+        userCall.enqueue(callback);
+    }
+
+    public void getSubjectsByCourse(long course_id, Callback<List<Subjects>> callback) {
+        Call<List<Subjects>> userCall = service.subjectByCourse(course_id);
+        userCall.enqueue(callback);
+    }
+
+    public void createSubject(long course_id, String title, Callback<ResponseBody> callback) {
+        Call<ResponseBody> userCall =  service.createSubject(course_id, title);
+        userCall.enqueue(callback);
+    }
+
+    public void deleteCourse(long course_id, Callback<ResponseBody> callback) {
+        Call<ResponseBody> userCall =  service.deleteCourse(course_id);
+        userCall.enqueue(callback);
+    }
+
+    public void deleteSubject(long id, Callback<ResponseBody> callback) {
+        Call<ResponseBody> userCall =  service.deleteSubject(id);
+        userCall.enqueue(callback);
+    }
+
+    public void getClassesByDateAndSubjectId(Long subject_id, String date, Long user_id, Callback<List<Classes>> callback) {
+        Call<List<Classes>> userCall = service.getClassesByDateSubjectId(subject_id, date, user_id);
+        userCall.enqueue(callback);
+    }
+
+    public void getClassesByDate(String date, Long user_id, Callback<List<Classes>> callback) {
+        Call<List<Classes>> userCall = service.getClassesByDate(date, user_id);
+        userCall.enqueue(callback);
+    }
+
+    public void deleteClass(long id, Callback<ResponseBody> callback) {
+        Call<ResponseBody> userCall =  service.deleteClass(id);
+        userCall.enqueue(callback);
+    }
+
+
+    public void getsubjectByTitle(String title, Callback<List<Subjects>> callback) {
+        Call<List<Subjects>> userCall = service.subjectByTitle(title);
+        userCall.enqueue(callback);
+    }
+
+    public void allRooms(Callback<List<Rooms>> callback) {
+        Call<List<Rooms>> userCall = service.allRooms();
+        userCall.enqueue(callback);
+    }
+
+    public void login(String email, String password, Callback<ResponseBody> callback) {
+        Call<ResponseBody> userCall = service.login(email, password);
+        userCall.enqueue(callback);
+    }
 }
