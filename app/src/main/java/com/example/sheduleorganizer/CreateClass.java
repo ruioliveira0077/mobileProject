@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,6 +53,7 @@ public class CreateClass extends AppCompatActivity {
     private Long course_id ;
     private Long subject_id ;
     private static UserManager userManager;
+    private Button addClass;
 
 
     @Override
@@ -190,6 +193,7 @@ public class CreateClass extends AppCompatActivity {
 
                 classesList.clear();
                 hoursList.clear();
+                durationList.clear();
                 Toast.makeText(view.getContext(),"date no drop : " + dateSelected, Toast.LENGTH_SHORT).show();
                 userManager.getsubjectByTitle(String.valueOf(parent.getItemAtPosition(position)), new Callback<List<Subjects>>() {
                     @Override
@@ -208,13 +212,13 @@ public class CreateClass extends AppCompatActivity {
                                         Log.d("statusSubjects", "200");
 
                                         //////////////////DRPoDOWN FOR Hours//////////////////////////////////////////////////
-                                        for (Integer j=9; j<=23; j++)
+                                        for (Integer j=9; j<23; j++)
                                         {
                                             hoursList.add(""+j+":00");
                                             ((ArrayAdapter) dropdownAdapterHours).notifyDataSetChanged();
                                         }
 
-                                        for (int i = response.body().size()-1; i < response.body().size(); i--) {
+                                        for (int i = response.body().size()-1; i >= 0 ; i--) {
                                             classesList.add(response.body().get(i));
                                             String dateHour = response.body().get(i).getDate();
 
@@ -223,16 +227,22 @@ public class CreateClass extends AppCompatActivity {
 
                                             int duration = response.body().get(i).getDuration();
 
-                                            int inicio = Integer.parseInt(parts2[1]);
+                                            int inicio = Integer.parseInt(parts2[0]);
                                             int fim = inicio +duration;
-
+                                            Log.d("inicio ", ""+inicio);
+                                            Log.d("fim ", ""+fim);
                                             for(int h=0;h<hoursList.size();h++)
                                             {
                                                 for(int k=inicio;k<=fim; k++)
                                                 {
-                                                    if(k == Integer.parseInt(hoursList.get(h)))
+                                                    String[] hoursSplit = hoursList.get(h).split(":");
+                                                    Log.d("Horas ", ""+k);
+                                                    Log.d("Horas ", ""+hoursSplit[0]);
+
+                                                    if(k == Integer.parseInt(hoursSplit[0]))
                                                     {
                                                         hoursList.remove(h);
+                                                        ((ArrayAdapter) dropdownAdapterHours).notifyDataSetChanged();
                                                     }
                                                 }
                                             }
@@ -299,13 +309,71 @@ public class CreateClass extends AppCompatActivity {
             }
         });
 
+        dropdownHours.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                durationList.clear();
 
+                String selectedHour = hoursList.get(position);
+                String [] parts= selectedHour.split(":");
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////DatePicker ///////////////////////////////////////////////////////////////////
+                if(Integer.parseInt(parts[0])==22){
+                    durationList.add("1 Hour");
+                }
+                else
+                {
+                    for(int i=1; i<=4;i++ ){
+                        String nextHour = hoursList.get(position+i);
+                        String [] parts2= nextHour.split(":");
+                        if (Integer.parseInt(parts2[0])==(Integer.parseInt(parts[0])+i)){
+                            durationList.add(i+" Hour");
+                            ((ArrayAdapter) dropdownAdapterDuration).notifyDataSetChanged();
+                        }else
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        addClass= findViewById(R.id.addClass);
+
+        addClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                userManager.createClass(Long.parseLong(userId),newCourse.getText().toString(), new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Log.w(" => ",new Gson().toJson(response));
+                        if (response.code() == 200) {
+                            Log.d("status", "200");
+
+                            /*
+                            Intent i = new Intent(GenericForm.this, CoursesActivity.class);
+                            startActivity(i);
+                            */
+
+                        } else {
+                            Log.d("status", "Failed");
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(CreateClass.this,
+                                "Error is " + t.getMessage()
+                                , Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////Navigation Bar ///////////////////////////////////////////////////////////////////

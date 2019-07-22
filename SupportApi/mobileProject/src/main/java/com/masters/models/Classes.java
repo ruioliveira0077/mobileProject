@@ -50,13 +50,14 @@ public class Classes {
 
     }
     
-    public Classes(Subjects subjects,Rooms rooms, Date   date, int duration ) {
+    public Classes(Subjects subjects,Rooms rooms, Date   date, Date dateToCompare, int duration ) {
 		super();
 		this.id = id; 
 		this.subjects = subjects;
 		this.date = date; 
 		this.rooms = rooms; 
 		this.duration = duration;
+		this.dateToCompare = this.dateToCompare; 
 	}
 
 	public Subjects getSubjects() {

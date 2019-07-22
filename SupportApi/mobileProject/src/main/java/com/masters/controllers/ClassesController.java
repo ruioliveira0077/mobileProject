@@ -14,11 +14,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masters.models.Classes;
+import com.masters.models.Courses;
+import com.masters.models.Rooms;
+import com.masters.models.Subjects;
 
 
 @RestController
@@ -57,5 +62,10 @@ public class ClassesController {
 		classesRepository.deleteClass(id);
 	}
 	
+	@PostMapping("/createClass")
+	@ResponseBody
+	public Classes CreateCourse( @RequestParam Subjects subject, @RequestParam Rooms rooms, @RequestParam Date date,  @RequestParam Date dateToCompare,@RequestParam int duration) { 
+		return classesRepository.save(new Classes(subject,rooms, date, dateToCompare,duration));
+	}
 }
 
