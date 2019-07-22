@@ -5,6 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="backgroundColor">#e5ffff</color>
     <color name="textViewOfRecyclerView">#a5aaac</color>
-    <color name="bgBottomNavigation">#145AF8</color>
+    <color name="bgBottomNavigation">#0e1e40</color>
     <color name="spinnerColor">#99000000</color>
 </resources>

@@ -4,36 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Menu">
+    tools:context=".Menu"
+    android:background="@drawable/test">
 
     <Button
         android:id="@+id/myCourses"
-        android:layout_width="202dp"
-        android:layout_height="136dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="396dp"
+        android:layout_height="184dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="#ff3547"
         android:text="Courses"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        android:drawableTop="@drawable/courses"
+        android:gravity="center"
+        android:padding="70dp"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/myDisciplines"
-        android:layout_width="202dp"
-        android:layout_height="136dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="397dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="212dp"
+        android:layout_marginEnd="4dp"
+        android:background="#f2cb05"
+        android:drawableTop="@drawable/disciplines"
+        android:gravity="center"
+        android:padding="70dp"
         android:text="Disciplines"
+        android:textColor="#fff"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
     <Button
         android:id="@+id/Calendar"
-        android:layout_width="404dp"
-        android:layout_height="134dp"
-        android:layout_marginTop="21dp"
+        android:layout_width="397dp"
+        android:layout_height="171dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginEnd="8dp"
+        android:background="#04b2d9"
         android:text="Calendar"
-        app:layout_constraintTop_toBottomOf="@+id/myCourses"
-        tools:layout_editor_absoluteX="0dp" />
+        android:textColor="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35"
+        android:drawableTop="@drawable/calendar"
+        android:gravity="center"
+        android:padding="60dp"
+        android:textStyle="bold" />
 
 
     <android.support.design.widget.BottomNavigationView
