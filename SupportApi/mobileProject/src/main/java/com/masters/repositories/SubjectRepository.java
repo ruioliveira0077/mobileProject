@@ -31,4 +31,9 @@ public interface SubjectRepository extends CrudRepository<Subjects, Long>{
     @Transactional
     @Query(value="delete from Subjects where id = :id")
     void deleteSubject(Long id);
+    
+    @Modifying
+    @Transactional
+    @Query(value = "Update Subjects set title = :title WHERE id=:subject_id",  nativeQuery = true)
+    void editSubject(@Param("subject_id") Long subject_id,@Param("title") String title);
 }

@@ -130,4 +130,9 @@ public class UserManager {
         Call<ResponseBody> userCall = service.editCourse(course_id,title);
         userCall.enqueue(callback);
     }
+
+    public void editSubject(long subject_id, String title, Callback<ResponseBody> callback) {
+        Call<ResponseBody> userCall =  service.editSubject(subject_id, title);
+        userCall.enqueue(callback);
+    }
 }

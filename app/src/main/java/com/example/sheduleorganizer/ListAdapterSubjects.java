@@ -2,6 +2,7 @@ package com.example.sheduleorganizer;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -70,6 +71,16 @@ public class ListAdapterSubjects  extends RecyclerView.Adapter<ListAdapterSubjec
                 });
             }
         });
+
+        viewHolder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (v.getContext(), CreateSubjectForm.class);
+                intent.putExtra("id_subject", ""+textStrings.get(i).getId());
+                intent.putExtra("name", textStrings.get(i).getTitle());
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -80,11 +91,13 @@ public class ListAdapterSubjects  extends RecyclerView.Adapter<ListAdapterSubjec
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView  text;
         ImageView delete;
+        ImageView edit;
         RelativeLayout parentLayout;
         public ViewHolder(View itemView){
             super(itemView);
             text = itemView.findViewById(R.id.text);
             delete = (ImageView) itemView.findViewById(R.id.delete);
+            edit = (ImageView) itemView.findViewById(R.id.edit);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }

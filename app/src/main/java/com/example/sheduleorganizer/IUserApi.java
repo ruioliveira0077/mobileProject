@@ -80,4 +80,10 @@ public interface IUserApi {
     @PUT("getCourses/editCourse")
     Call<ResponseBody> editCourse(@Field("course_id") long course_id,
                                     @Field("title") String title);
+
+    @FormUrlEncoded
+    @PUT("getSubjects/editSubject")
+    Call<ResponseBody> editSubject(@Field("subject_id") long subject_id,
+                                     @Field("title") String title);
+
 }
