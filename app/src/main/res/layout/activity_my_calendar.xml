@@ -43,7 +43,7 @@
         android:layout_marginTop="384dp"
         app:layout_constraintTop_toTopOf="@+id/calendar"
         tools:layout_editor_absoluteX="0dp"
-        style="@style/SpinnerTheme"/>
+        />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
