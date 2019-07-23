@@ -48,7 +48,7 @@ public class ListAdapterTimeTable  extends RecyclerView.Adapter<ListAdapterTimeT
         int duration = Integer.parseInt(parts2[0])+textStrings.get(i).getDuration();
         viewHolder.hours.setText(parts2[0]+":00-"+duration+":00");
 
-        //viewHolder.room.setText("Room: "+textStrings.get(i).getRoom().getId());
+        viewHolder.room.setText("Room: Sala1");
         viewHolder.info.setText("Course: "+textStrings.get(i).getSubjects().getCourses().getTitle()+"\n  Subject: "+textStrings.get(i).getSubjects().getTitle());
 
         userManager = userManager.getInstance();
