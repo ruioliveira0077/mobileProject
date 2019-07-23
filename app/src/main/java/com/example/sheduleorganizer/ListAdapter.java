@@ -77,10 +77,9 @@ public class ListAdapter  extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
         viewHolder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Delete at position"+textStrings.get(i).getId(), Toast.LENGTH_SHORT).show();
-
-               // startActivity(new Intent(CoursesActivity.this, GenericForm.class));
                 Intent intent = new Intent (v.getContext(), GenericForm.class);
+                intent.putExtra("id_course", ""+textStrings.get(i).getId());
+                intent.putExtra("name", textStrings.get(i).getTitle());
                 v.getContext().startActivity(intent);
 
             }

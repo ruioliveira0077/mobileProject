@@ -56,7 +56,7 @@ public class UserManager {
     }
 
     public void createCourse(long user_id, String title, Callback<ResponseBody> callback) {
-        Call<ResponseBody> userCall = service.createUser(user_id,title);
+        Call<ResponseBody> userCall = service.createCourse(user_id,title);
         userCall.enqueue(callback);
     }
 
@@ -123,6 +123,11 @@ public class UserManager {
 
     public void createClass(long subject_id, long room_id, String date, String dateToCompare, int duration, Callback<ResponseBody> callback) {
         Call<ResponseBody> userCall = service.createClass(subject_id,room_id, date, dateToCompare, duration);
+        userCall.enqueue(callback);
+    }
+
+    public void editCourse(long course_id, String title, Callback<ResponseBody> callback) {
+        Call<ResponseBody> userCall = service.editCourse(course_id,title);
         userCall.enqueue(callback);
     }
 }

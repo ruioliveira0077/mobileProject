@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -23,12 +24,23 @@ public class GenericForm extends Activity {
     Button save;
     EditText newCourse;
     public static UserManager userManager;
+    private TextView courseTitle;
+    long courseId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.generic_form);
         userManager = userManager.getInstance();
+
+        Intent i = getIntent();
+
+        if (i.getStringExtra("id_course") != null)
+        {
+            courseId = Long.parseLong(i.getStringExtra("id_course"));
+            courseTitle = findViewById(R.id.addCourse);
+            courseTitle.setText(i.getStringExtra("name"));
+        }
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -48,28 +60,58 @@ public class GenericForm extends Activity {
                 final String userId = shared.getString("id","DEFAULT");
                 Log.d("userId", userId);
 
-                userManager.createCourse(Long.parseLong(userId),newCourse.getText().toString(), new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        Log.w(" => ",new Gson().toJson(response));
-                        if (response.code() == 200) {
-                            Log.d("status", "200");
+
+                Toast.makeText(GenericForm.this, "course at position"+courseId, Toast.LENGTH_SHORT).show();
+                if (courseId == 0) {
+                    userManager.createCourse(Long.parseLong(userId), newCourse.getText().toString(), new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            Log.w(" => ", new Gson().toJson(response));
+                            if (response.code() == 200) {
+                                Log.d("status", "200");
 
 
-                            Intent i = new Intent(GenericForm.this, CoursesActivity.class);
-                            startActivity(i);
+                                Intent i = new Intent(GenericForm.this, CoursesActivity.class);
+                                startActivity(i);
 
-                        } else {
-                            Log.d("status", "Failed");
+                            } else {
+                                Log.d("status", "Failed");
+                            }
                         }
-                    }
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(GenericForm.this,
-                                "Error is " + t.getMessage()
-                                , Toast.LENGTH_LONG).show();
-                    }
-                });
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Toast.makeText(GenericForm.this,
+                                    "Error is " + t.getMessage()
+                                    , Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+                else{
+                    userManager.editCourse(courseId, newCourse.getText().toString(), new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            Log.w(" => ", new Gson().toJson(response));
+                            if (response.code() == 200) {
+                                Log.d("status", "200");
+
+
+                                Intent i = new Intent(GenericForm.this, CoursesActivity.class);
+                                startActivity(i);
+
+                            } else {
+                                Log.d("status", "Failed");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Toast.makeText(GenericForm.this,
+                                    "Error is " + t.getMessage()
+                                    , Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             }
         });
     }

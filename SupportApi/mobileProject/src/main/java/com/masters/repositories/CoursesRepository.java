@@ -23,4 +23,9 @@ public interface CoursesRepository extends CrudRepository<Courses, Long>{
     @Transactional
     @Query(value="delete from Courses where id = :id")
     void deleteCourseById(Long id);
+    
+    @Modifying
+    @Transactional
+    @Query(value = "Update Courses set title = :title WHERE id=:course_id",  nativeQuery = true)
+    void editCourse(@Param("course_id") Long course_id,@Param("title") String title);
 }

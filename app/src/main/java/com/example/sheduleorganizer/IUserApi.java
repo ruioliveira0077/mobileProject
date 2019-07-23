@@ -11,6 +11,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -27,7 +28,7 @@ public interface IUserApi {
 
     @FormUrlEncoded
     @POST("getCourses/createCourse")
-    Call<ResponseBody> createUser(@Field("user_id") long user_id,
+    Call<ResponseBody> createCourse(@Field("user_id") long user_id,
                                   @Field("title") String title);
 
     @GET("getCourses/courseByTitle")
@@ -75,4 +76,8 @@ public interface IUserApi {
                                    @Field("date") String date,
                                    @Field("dateToCompare") String dateToCompare,
                                      @Field("duration") int duration);
+    @FormUrlEncoded
+    @PUT("getCourses/editCourse")
+    Call<ResponseBody> editCourse(@Field("course_id") long course_id,
+                                    @Field("title") String title);
 }
