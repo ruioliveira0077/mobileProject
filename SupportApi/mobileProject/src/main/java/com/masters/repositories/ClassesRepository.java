@@ -24,7 +24,7 @@ public interface ClassesRepository extends CrudRepository<Classes, Long>{
 	 @Query(value = "SELECT * FROM Classes LEFT Join Rooms on Classes.room_id = Rooms.id "+
 	 "LEFT Join Subjects on Classes.subject_id = Subjects.id "+
 	 "Left Join Courses on Subjects.course_id = Courses.id "+
-	 " WHERE dateToCompare = :date And Courses.user_id = :user_id",  nativeQuery = true)
+	 " WHERE dateToCompare = :date And Courses.user_id = :user_id Order By date ASC",  nativeQuery = true)
 	 Iterable<Classes> classesByDate(@Param("date")String date, @Param("user_id")Long user_id );
 	 
 	 @Query(value = "SELECT * FROM Classes LEFT Join Rooms on Classes.room_id = Rooms.id "+

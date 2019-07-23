@@ -89,18 +89,18 @@
         app:menu="@layout/navigation"
         tools:layout_editor_absoluteX="16dp" />
 
-    Pinha, [23.07.19 14:10]
+    Pinha, [23.07.19 15:04]
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="8dp"
         android:text="Select Course:"
         app:layout_constraintBottom_toTopOf="@+id/selectCourse"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/myCOurses" />
 
     <TextView
         android:id="@+id/textView2"
@@ -155,11 +155,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="307dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="Add"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectDuration" />
+
+    <TextView
+        android:id="@+id/myCOurses"
+        android:layout_width="149dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_vertical"
+        android:text="Create class"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

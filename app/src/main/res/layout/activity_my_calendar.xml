@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyCalendarActivity"
-    android:background="@drawable/test">
+    android:background="@drawable/test"
+    tools:context=".MyCalendarActivity">
 
     <CalendarView
         android:id="@+id/calendar"
@@ -16,16 +16,21 @@
 
     <Button
         android:id="@+id/addClass"
-        android:layout_width="150dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="96dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="8dp"
-        android:text="Continue"
+        android:background="?android:attr/selectableItemBackground"
+        android:drawableTop="@drawable/next"
+        android:gravity="center"
+        android:text="Next"
+        android:textColor="@color/common_google_signin_btn_text_light_focused"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.026"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendar" />
+        app:layout_constraintTop_toBottomOf="@+id/selectType" />
 
     <!-- Text Label -->
     <TextView
@@ -56,11 +61,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:background="@color/bgBottomNavigation"
         android:foreground="?attr/selectableItemBackground"
         app:itemBackground="@color/bgBottomNavigation"
         app:itemIconTint="@android:color/white"
         app:itemTextColor="@android:color/white"
-        android:background="@color/bgBottomNavigation"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addClass"

@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 
 import com.google.gson.Gson;
@@ -85,9 +84,11 @@ public class MyCalendarActivity extends AppCompatActivity {
         addClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                create.putExtra("date", dateParam);
-                startActivity(create);
+                if(dateParam != null)
+                {
+                    create.putExtra("date", dateParam);
+                    startActivity(create);
+                }
             }
         });
 

@@ -80,7 +80,6 @@ public class CoursesActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CoursesActivity.this, "Add Course", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(CoursesActivity.this, GenericForm.class));
             }
         });

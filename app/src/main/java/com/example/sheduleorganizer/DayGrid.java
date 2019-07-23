@@ -73,7 +73,6 @@ public class DayGrid extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<List<Classes>> call, Throwable t) {
-                Log.d("eroos",t.getMessage() );
                 Toast.makeText(DayGrid.this,
                         "Error is " + t.getMessage()
                         , Toast.LENGTH_LONG).show();

@@ -94,7 +94,6 @@ public class DisciplinesActivity<course_id> extends AppCompatActivity{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 recyclerViewStrings.clear();
-                Toast.makeText(view.getContext(),"OnItemSelectedListener : " + parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
 
                 userManager.getCourseByTitle(Long.parseLong(userId),String.valueOf(parent.getItemAtPosition(position)), new Callback<List<Courses>>() {
                     @Override
@@ -155,7 +154,6 @@ public class DisciplinesActivity<course_id> extends AppCompatActivity{
         add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(course_id!=0){
-                    Toast.makeText(DisciplinesActivity.this, "Add Subject", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(DisciplinesActivity.this, CreateSubjectForm.class);
                     i.putExtra("course_id",Long.toString(course_id));
                     startActivity(i);

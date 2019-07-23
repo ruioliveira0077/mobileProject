@@ -12,30 +12,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:src="@drawable/add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.919"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <Spinner
         android:id="@+id/selectCourse"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:layout_marginBottom="29dp"
-        app:layout_constraintBottom_toTopOf="@+id/subjectsList"
-        app:layout_constraintTop_toBottomOf="@+id/add" />
+        android:layout_height="29dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="#5e89d1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/subjectsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        app:layout_constraintTop_toBottomOf="@+id/add"
-        tools:layout_editor_absoluteX="0dp">
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="323dp"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectCourse">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -55,5 +64,30 @@
         app:layout_constraintVertical_bias="1.0"
         app:menu="@layout/navigation"
         tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/myCOurses"
+        android:layout_width="149dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="213dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_vertical"
+        android:text="My Subjects"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/add"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Select course:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myCOurses" />
 
 </android.support.constraint.ConstraintLayout>
