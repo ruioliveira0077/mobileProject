@@ -5,6 +5,15 @@ public class Subjects {
     String title;
     Long id;
     Long course_id;
+    private Courses courses;
+
+    public Courses getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Courses courses) {
+        this.courses = courses;
+    }
 
     public String getTitle() {
         return title;

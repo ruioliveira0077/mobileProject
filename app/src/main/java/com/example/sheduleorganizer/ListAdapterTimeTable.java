@@ -43,8 +43,13 @@ public class ListAdapterTimeTable  extends RecyclerView.Adapter<ListAdapterTimeT
 
     @Override
     public void onBindViewHolder(@NonNull ListAdapterTimeTable.ViewHolder viewHolder, final int i) {
-        viewHolder.hours.setText(textStrings.get(i).getDate());
+        String [] parts = textStrings.get(i).getDate().split("T");
+        String [] parts2 = parts[1].split(":");
+        int duration = Integer.parseInt(parts2[0])+textStrings.get(i).getDuration();
+        viewHolder.hours.setText(parts2[0]+":00-"+duration+":00");
 
+        //viewHolder.room.setText("Room: "+textStrings.get(i).getRoom().getId());
+        viewHolder.info.setText("Course: "+textStrings.get(i).getSubjects().getCourses().getTitle()+"\n  Subject: "+textStrings.get(i).getSubjects().getTitle());
 
         userManager = userManager.getInstance();
 

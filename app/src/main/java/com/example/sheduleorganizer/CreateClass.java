@@ -325,15 +325,20 @@ public class CreateClass extends AppCompatActivity {
                 else
                 {
                     for(int i=1; i<=4;i++ ){
-                        String nextHour = hoursList.get(position+i);
-                        String [] parts2= nextHour.split(":");
-                        if (Integer.parseInt(parts2[0])==(Integer.parseInt(parts[0])+i)){
-                            durationList.add(i+" Hour");
-                            ((ArrayAdapter) dropdownAdapterDuration).notifyDataSetChanged();
-                        }else
+                        if(hoursList.size()>position+i)
                         {
-                            break;
+                            Log.d("duration",""+i);
+                            String nextHour = hoursList.get(position+i);
+                            String [] parts2= nextHour.split(":");
+                            if (Integer.parseInt(parts2[0])==(Integer.parseInt(parts[0])+i)){
+                                durationList.add(i+" Hour");
+                                ((ArrayAdapter) dropdownAdapterDuration).notifyDataSetChanged();
+                            }else
+                            {
+                                break;
+                            }
                         }
+
                     }
                 }
             }
