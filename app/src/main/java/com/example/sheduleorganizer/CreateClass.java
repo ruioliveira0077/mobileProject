@@ -50,8 +50,10 @@ public class CreateClass extends AppCompatActivity {
     private ArrayList<String> durationList = new ArrayList<String>();
     private ArrayList<String> subjectsList = new ArrayList<String>();
     private ArrayList<Classes> classesList = new ArrayList<Classes>();
-    private Long course_id ;
+    private Long room_id ;
     private Long subject_id ;
+    private  String date;
+    private int duration;
     private static UserManager userManager;
     private Button addClass;
 
@@ -136,7 +138,7 @@ public class CreateClass extends AppCompatActivity {
                             if (response.code() == 200) {
                                 Log.d("status", "200");
 
-                                course_id= response.body().get(0).getId();
+                                //course_id= response.body().get(0).getId();
 
                                 userManager.getSubjectsByCourse(response.body().get(0).getId(), new Callback<List<Subjects>>() {
                                     @Override
@@ -194,7 +196,6 @@ public class CreateClass extends AppCompatActivity {
                 classesList.clear();
                 hoursList.clear();
                 durationList.clear();
-                Toast.makeText(view.getContext(),"date no drop : " + dateSelected, Toast.LENGTH_SHORT).show();
                 userManager.getsubjectByTitle(String.valueOf(parent.getItemAtPosition(position)), new Callback<List<Subjects>>() {
                     @Override
                     public void onResponse(Call<List<Subjects>> call, Response<List<Subjects>> response) {
@@ -317,7 +318,7 @@ public class CreateClass extends AppCompatActivity {
 
                 String selectedHour = hoursList.get(position);
                 String [] parts= selectedHour.split(":");
-
+                date = dateSelected+" "+parts[0]+":00:00";
                 if(Integer.parseInt(parts[0])==22){
                     durationList.add("1 Hour");
                 }
@@ -343,21 +344,73 @@ public class CreateClass extends AppCompatActivity {
             }
         });
 
+
+        dropdownRooms.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                userManager.getRoomByTitle(String.valueOf(parent.getItemAtPosition(position)), new Callback<List<Rooms>>() {
+                    @Override
+                    public void onResponse(Call<List<Rooms>> call, Response<List<Rooms>> response) {
+                        Log.w(" => ", new Gson().toJson(response));
+                        if (response.code() == 200) {
+                            Log.d("status", "200");
+
+                            room_id= response.body().get(0).getId();
+
+                        } else {
+                            Log.d("status", "Failed");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Rooms>> call, Throwable t) {
+                        Log.d("eroos", t.getMessage());
+                        Toast.makeText(CreateClass.this,
+                                "Error is " + t.getMessage()
+                                , Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        dropdownDuration.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               String durationString= String.valueOf(parent.getItemAtPosition(position));
+               String[] durationSplit = durationString.split(" ");
+               duration = Integer.parseInt(durationSplit[0]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         addClass= findViewById(R.id.addClass);
 
         addClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                userManager.createClass(Long.parseLong(userId),newCourse.getText().toString(), new Callback<ResponseBody>() {
+
+                userManager.createClass(subject_id, room_id, date, dateSelected, duration, new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Log.w(" => ",new Gson().toJson(response));
                         if (response.code() == 200) {
                             Log.d("status", "200");
 
-                           
-                            Intent i = new Intent(GenericForm.this, CoursesActivity.class);
+
+                            Intent i = new Intent(CreateClass.this, DayGrid.class);
+                            i.putExtra("date",dateSelected);
                             startActivity(i);
 
 
@@ -372,7 +425,7 @@ public class CreateClass extends AppCompatActivity {
                                 , Toast.LENGTH_LONG).show();
                     }
                 });
-                */
+
             }
         });
 

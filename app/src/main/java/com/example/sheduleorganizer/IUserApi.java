@@ -59,9 +59,20 @@ public interface IUserApi {
     @GET("getSubjects/subjectByTitle")
     Call<List<Subjects>> subjectByTitle(@Query("title")String title );
 
+    @GET("getRooms/roomByTitle")
+    Call<List<Rooms>> roomByTitle(@Query("title")String title );
+
     @GET("getRooms/allRooms")
     Call<List<Rooms>> allRooms();
 
     @POST("user/login")
     Call<ResponseBody> login(@Query("email") String email, @Query("password") String password);
+
+    @FormUrlEncoded
+    @POST("getClasses/createClass")
+    Call<ResponseBody> createClass(@Field("subject_id") long subject_id,
+                                   @Field("room_id") long room_id,
+                                   @Field("date") String date,
+                                   @Field("dateToCompare") String dateToCompare,
+                                     @Field("duration") int duration);
 }
