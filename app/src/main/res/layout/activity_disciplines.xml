@@ -75,6 +75,7 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center_vertical"
         android:text="My Subjects"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/add"
         app:layout_constraintStart_toStartOf="parent"
