@@ -17,6 +17,8 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Classes {
 
@@ -27,12 +29,14 @@ public class Classes {
     
     private int duration; 
 
-	//Long subject_id;
-    //Long room_id;
+	Long subject_id;
+    Long room_id;
     Date date;
     @Temporal(TemporalType.DATE)
+   
     Date dateToCompare;
-
+   
+    
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "room_id", insertable = false, updatable = false)
 	@Fetch(FetchMode.JOIN)
@@ -57,7 +61,9 @@ public class Classes {
 		this.date = date; 
 		this.rooms = rooms; 
 		this.duration = duration;
-		this.dateToCompare = this.dateToCompare; 
+		this.dateToCompare = dateToCompare; 
+		this.subject_id = subjects.getId(); 
+		this.room_id=rooms.getId(); 
 	}
 
 	public Subjects getSubjects() {
@@ -106,6 +112,22 @@ public class Classes {
 
 	public void setDateToCompare(Date dateToCompare) {
 		this.dateToCompare = dateToCompare;
+	}
+
+	public Long getSubject_id() {
+		return subject_id;
+	}
+
+	public void setSubject_id(Long subject_id) {
+		this.subject_id = subject_id;
+	}
+
+	public Long getRoom_id() {
+		return room_id;
+	}
+
+	public void setRoom_id(Long room_id) {
+		this.room_id = room_id;
 	}
     
 }

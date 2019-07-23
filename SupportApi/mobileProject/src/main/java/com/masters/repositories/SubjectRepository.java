@@ -25,6 +25,7 @@ public interface SubjectRepository extends CrudRepository<Subjects, Long>{
 	 
 	 @Query(value = "SELECT * FROM Subjects  WHERE title=:title",  nativeQuery = true)
 	 Iterable<Subjects> subjectByTitle(@Param("title") String title);
+	
 	 
     @Modifying
     @Transactional

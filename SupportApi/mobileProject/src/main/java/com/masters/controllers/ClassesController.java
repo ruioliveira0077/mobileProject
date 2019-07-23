@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,7 +33,9 @@ import com.masters.models.Subjects;
 public class ClassesController {
 	@Autowired // This means to get the bean called userRepository
 	private com.masters.repositories.ClassesRepository classesRepository;
+	@Autowired // This means to get the bean called userRepository
 	private com.masters.repositories.SubjectRepository subjectsRepository;
+	@Autowired // This means to get the bean called userRepository
 	private com.masters.repositories.RoomsRepository roomsRepository;
 	
 	@GetMapping("/classesBySubject")
@@ -67,20 +70,24 @@ public class ClassesController {
 	
 	@PostMapping("/createClass")
 	@ResponseBody
-	public Classes CreateClass( @RequestParam long subject_id, @RequestParam long room_id, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") String date,  @RequestParam String dateToCompare,@RequestParam int duration) throws ParseException { 
+	public Classes CreateClass( @RequestParam long subject_id, @RequestParam long room_id, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") String date,  @RequestParam  @DateTimeFormat(pattern = "yyyy-MM-dd")  String dateToCompare,@RequestParam int duration) throws ParseException { 
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+			
+		System.out.println(date);
+		System.out.println(dateToCompare);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
 		Date strDate = dateFormat.parse(dateToCompare);  
+		
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date strDate2 = sdf.parse(date);
 		
-		System.out.println("my id is"+subject_id);
+		Optional<Subjects> subject =  subjectsRepository.findById(subject_id);
+		Optional<Rooms> room = roomsRepository.findById(room_id);
+		System.out.println(strDate);
+		System.out.println(strDate2);
 		
-		List<Subjects> subject = (List<Subjects>) subjectsRepository.subjectById(subject_id);
-		List<Rooms> room = (List<Rooms>) roomsRepository.roomById(room_id);
-		
-		return classesRepository.save(new Classes(subject.get(0),room.get(0), strDate2, strDate,duration));
+		return classesRepository.save(new Classes(subject.get(),room.get(), strDate2, strDate2,duration));
 	}
 }
 

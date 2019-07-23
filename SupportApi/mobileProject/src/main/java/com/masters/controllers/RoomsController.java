@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masters.models.Rooms;
+import com.masters.models.Subjects;
 
 @RestController
 @RequestMapping("/getRooms")
@@ -19,5 +20,10 @@ public class RoomsController {
 	@GetMapping("/allRooms")
     public List<Rooms> allRooms() {
         return (List<Rooms>) roomsRepository.allRooms();
+    }
+	
+	@GetMapping("/roomByTitle")
+    public List<Rooms> subjectByTitle(@RequestParam("title") String title) {
+        return (List<Rooms>) roomsRepository.roomByTitle(title);
     }
 }
