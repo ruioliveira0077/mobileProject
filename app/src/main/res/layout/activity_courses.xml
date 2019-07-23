@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Courses">
+    tools:context=".Courses"
+    android:background="@drawable/test">
 
     <ImageView
         android:id="@+id/add"
@@ -43,5 +44,4 @@
         app:layout_constraintVertical_bias="1.0"
         app:menu="@layout/navigation"
         tools:layout_editor_absoluteX="0dp" />
-
 </android.support.constraint.ConstraintLayout>

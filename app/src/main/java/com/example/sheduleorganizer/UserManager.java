@@ -111,8 +111,18 @@ public class UserManager {
         userCall.enqueue(callback);
     }
 
+    public void getRoomByTitle(String title, Callback<List<Rooms>> callback) {
+        Call<List<Rooms>> userCall = service.roomByTitle(title);
+        userCall.enqueue(callback);
+    }
+
     public void login(String email, String password, Callback<ResponseBody> callback) {
         Call<ResponseBody> userCall = service.login(email, password);
+        userCall.enqueue(callback);
+    }
+
+    public void createClass(long subject_id, long room_id, String date, String dateToCompare, int duration, Callback<ResponseBody> callback) {
+        Call<ResponseBody> userCall = service.createClass(subject_id,room_id, date, dateToCompare, duration);
         userCall.enqueue(callback);
     }
 }
